@@ -87,7 +87,7 @@ body {
   position: relative;
   width: min(430px, 94vw);
   aspect-ratio: 430 / 932;
-  height: min(950px, 92dvh);
+  height: min(932px, 92dvh);
   max-width: 94vw;
   background: var(--paper);
   border-radius: 46px;
@@ -862,5 +862,43 @@ body {
   #screen-reporte .hero-panel-sm {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+}
+
+/* ---------- Celular real: el marco de smartphone estorba en vez de
+   ayudar (la pantalla ya es la pantalla), así que en anchos angostos
+   se quita y el contenido usa el 100% del viewport. ---------- */
+@media (max-width: 480px) {
+  .backdrop {
+    padding: 0;
+    min-height: 100dvh;
+    background: var(--paper); /* ya no se necesita el fondo decorativo detrás */
+  }
+  .phone {
+    width: 100vw;
+    height: 100dvh;
+    aspect-ratio: unset;
+    max-width: 100vw;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .notch {
+    display: none; /* el celular real ya tiene su propia muesca/cámara */
+  }
+  .statusbar {
+    display: none; /* el celular real ya muestra su propia hora/batería */
+  }
+  .screen-container {
+    /* ajusta el padding-top ya que no hay notch/statusbar ocupando espacio;
+       env(safe-area-inset-top) evita que el contenido quede debajo de la
+       muesca/cámara REAL del dispositivo (notch, Dynamic Island, etc.) */
+    padding-top: max(8px, env(safe-area-inset-top, 0px));
+  }
+  .push-banner {
+    /* mismo motivo: sin nuestra muesca simulada de referencia, hay que
+       respetar la zona segura real del dispositivo para que el banner
+       no aparezca oculto tras la cámara/notch. */
+    top: max(8px, env(safe-area-inset-top, 0px));
   }
 }
