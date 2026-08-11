@@ -1,0 +1,866 @@
+/* ============================================================
+   WawitaSana — Sistema de diseño
+   Paleta tomada del logo real (images/logo.jpeg): primario = morado
+   (figura que abraza), salud = turquesa (manta del bebé), wawa = rosa
+   (el corazón), calido-tint = piel durazno. Semáforo de riesgo se
+   mantiene con los colores funcionales universales (verde/ámbar/rojo).
+   Tipografía: Baloo 2 (display, cálida y redondeada) + Inter (UI).
+   ============================================================ */
+
+:root {
+  --paper: #fdfafb;
+  --paper-2: #f1ecf7;
+  --ink: #2b2438;
+  --ink-soft: #6b6178;
+  --border: #e2d9ee;
+
+  --primario: #8b7cc3;
+  --primario-dark: #6b5a9e;
+  --primario-tint: #efeaf7;
+
+  --salud: #5bc2ba;
+  --salud-dark: #3e9992;
+  --salud-tint: #e3f5f3;
+
+  --wawa: #ef87a6;
+  --wawa-dark: #d66288;
+  --wawa-tint: #fceaf0;
+
+  --calido-tint: #fbe7d4;
+
+  --riesgo-bajo: #3fa772;
+  --riesgo-medio: #e0a72e;
+  --riesgo-alto: #c1502e;
+
+  --surface: #ffffff;
+
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+
+  /* Sombras suaves y tintadas (Flat 2.0): dan profundidad sutil
+     sin recurrir a negro puro ni a bordes duros. */
+  --shadow-sm: 0 2px 10px rgba(43, 36, 56, 0.06);
+  --shadow-md: 0 10px 24px rgba(43, 36, 56, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #1a1420;
+  font-family: "Inter", sans-serif;
+  color: var(--ink);
+}
+
+.font-display {
+  font-family: "Baloo 2", "Inter", sans-serif;
+}
+
+/* ---------- Fondo de escritorio ---------- */
+.backdrop {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(139, 124, 195, 0.35),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 85%,
+      rgba(239, 135, 166, 0.22),
+      transparent 45%
+    ),
+    #1a1420;
+}
+
+/* ---------- Marco del smartphone ---------- */
+.phone {
+  position: relative;
+  width: min(430px, 94vw);
+  aspect-ratio: 430 / 932;
+  height: min(950px, 92dvh);
+  max-width: 94vw;
+  background: var(--paper);
+  border-radius: 46px;
+  border: 10px solid #100b16;
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 132px;
+  height: 28px;
+  background: #100b16;
+  border-radius: 0 0 16px 16px;
+  z-index: 30;
+}
+
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  flex-shrink: 0;
+}
+.statusbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.statusbar-icons svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Envoltorio para iconos SVG insertados dinámicamente vía innerHTML:
+   el <svg> no hereda el tamaño del contenedor por sí solo. */
+.icon-sm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-sm svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.screen-container {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  padding: 4px 20px 28px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+
+.screen.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.screen::-webkit-scrollbar {
+  width: 0;
+}
+
+/* ---------- Navegación inferior ---------- */
+.bottom-nav {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 8px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+/* El atributo [hidden] tiene la misma especificidad que .bottom-nav y,
+   al ser ambas reglas del autor, no gana por origen: sin esta regla,
+   display:flex de arriba deja la barra visible aunque esté "hidden". */
+.bottom-nav[hidden] {
+  display: none;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 10px;
+}
+
+.nav-item.active {
+  color: var(--primario);
+}
+.nav-item svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* ---------- Utilidades de tarjetas ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Fila clave/valor apilada verticalmente (en vez de label...valor en la
+   misma línea): evita que un correo o dirección largos se corten o se
+   aprieten, sin importar el ancho del texto. */
+.kv-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.kv-row:last-child {
+  border-bottom: none;
+}
+.kv-label {
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.kv-value {
+  font-size: 13.5px;
+  font-weight: 600;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Borde sutil que retoma el color del ícono/fondo de la tarjeta, para que
+   no se pierda sobre el blanco (tint del color, oscurecido 15%). */
+.card--tint-primario {
+  border-color: color-mix(in srgb, var(--primario-tint) 85%, black 15%);
+}
+.card--tint-salud {
+  border-color: color-mix(in srgb, var(--salud-tint) 85%, black 15%);
+}
+.card--tint-wawa {
+  border-color: color-mix(in srgb, var(--wawa-tint) 85%, black 15%);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pill-bajo {
+  background: #e7f5ee;
+  color: var(--riesgo-bajo);
+}
+.pill-medio {
+  background: #fbf1de;
+  color: var(--riesgo-medio);
+}
+.pill-alto {
+  background: #f8e7e1;
+  color: var(--riesgo-alto);
+}
+
+.btn-primary {
+  background: var(--primario);
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 20px;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(139, 124, 195, 0.28);
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.btn-primary:hover {
+  background: var(--primario-dark);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 13px 20px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.input {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 13px 14px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  color: var(--ink);
+}
+.input:focus {
+  outline: 2px solid var(--primario);
+  outline-offset: 1px;
+}
+
+/* ---------- Fotos circulares de avatar (cabeceras, perfiles) ---------- */
+.avatar-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* ---------- Toast ---------- */
+#toast {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 90px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  z-index: 40;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  pointer-events: none;
+}
+#toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Ruta hematológica (elemento distintivo) ---------- */
+.ruta-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 14px;
+  position: relative;
+}
+.ruta-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+.ruta-step .dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--border);
+  margin: 0 auto 8px;
+  position: relative;
+  z-index: 2;
+  border: 3px solid var(--paper);
+}
+.ruta-step .line {
+  position: absolute;
+  top: 8px;
+  left: -50%;
+  width: 100%;
+  height: 3px;
+  background: var(--border);
+  z-index: 1;
+}
+.ruta-step:first-child .line {
+  display: none;
+}
+.ruta-step.done .dot {
+  background: var(--primario);
+}
+.ruta-step.done .line {
+  background: var(--primario);
+}
+.ruta-step.current .dot {
+  background: var(--wawa);
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 0 5px var(--wawa-tint);
+}
+.ruta-step .label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  line-height: 1.2;
+}
+.ruta-step.current .label,
+.ruta-step.done .label {
+  color: var(--ink);
+}
+
+/* ---------- Selector de rol ---------- */
+.role-path {
+  position: relative;
+  padding-left: 46px;
+}
+.role-path::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--border) 0 6px,
+    transparent 6px 12px
+  );
+}
+.role-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition:
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+.role-card:hover {
+  border-color: var(--primario);
+}
+.role-card:active {
+  transform: scale(0.98);
+}
+.role-card::before {
+  content: "";
+  position: absolute;
+  left: -33px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--wawa);
+  border: 3px solid var(--paper);
+  box-shadow: 0 0 0 2px var(--border);
+}
+.role-icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primario-tint);
+  color: var(--primario);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.role-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.role-title {
+  font-weight: 700;
+  font-size: 15px;
+  overflow-wrap: break-word;
+}
+.role-desc {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 1px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+.role-card.disabled {
+  opacity: 0.55;
+}
+
+/* ---------- Banner de notificación (estilo push, arriba del teléfono) ---------- */
+.push-banner {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  right: 12px;
+  z-index: 50;
+  background: var(--surface);
+  border-radius: 18px;
+  box-shadow: var(--shadow-md);
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  cursor: pointer;
+  transform: translateY(-140%);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.push-banner.show {
+  transform: translateY(0);
+}
+
+/* ---------- Switch (consentimiento por médico) ---------- */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 26px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--border);
+  transition: background-color 0.18s ease;
+  border-radius: 999px;
+}
+.switch .slider::before {
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  transition: transform 0.18s ease;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.switch input:checked + .slider {
+  background-color: var(--primario);
+}
+.switch input:checked + .slider::before {
+  transform: translateX(18px);
+}
+.switch input:focus-visible + .slider {
+  outline: 2px solid var(--primario);
+  outline-offset: 2px;
+}
+
+/* ---------- Panel de cabecera con color (hero) ---------- */
+.hero-panel {
+  position: relative;
+  overflow: hidden;
+  margin: -4px -20px 22px;
+  padding: 24px 20px 38px;
+  background: linear-gradient(
+    150deg,
+    var(--primario) 0%,
+    var(--primario-dark) 100%
+  );
+  border-radius: 0 0 34px 34px;
+  text-align: center;
+}
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+}
+.hero-shape--1 {
+  width: 160px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.07);
+  top: -70px;
+  right: -50px;
+}
+.hero-shape--2 {
+  width: 90px;
+  height: 90px;
+  background: var(--wawa);
+  opacity: 0.3;
+  bottom: -35px;
+  left: -25px;
+}
+.hero-shape--3 {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.14);
+  bottom: 18px;
+  right: 30px;
+}
+
+/* ---------- Variante compacta del hero-panel para pantallas de uso
+   frecuente (dashboard, ruta, alertas, perfil, etc.) — mismo color de
+   marca, menos espacio vertical que el hero-panel de bienvenida. ---------- */
+.hero-panel-sm {
+  position: relative;
+  overflow: hidden;
+  margin: -4px -20px 18px;
+  padding: 18px 20px 24px;
+  background: linear-gradient(
+    150deg,
+    var(--primario) 0%,
+    var(--primario-dark) 100%
+  );
+  border-radius: 0 0 26px 26px;
+}
+.hero-panel-sm .hero-shape--1 {
+  width: 112px;
+  height: 112px;
+  top: -50px;
+  right: -35px;
+}
+.hero-panel-sm .hero-shape--2 {
+  width: 63px;
+  height: 63px;
+  bottom: -25px;
+  left: -18px;
+}
+.hero-panel-sm .hero-shape--3 {
+  width: 31px;
+  height: 31px;
+  bottom: 12px;
+  right: 20px;
+}
+
+/* Variante rosa del hero-panel-sm para la sección del niño */
+.hero-panel-sm--wawa {
+  background: linear-gradient(150deg, var(--wawa) 0%, var(--wawa-dark) 100%);
+}
+
+/* Botón "volver" translúcido sobre un hero-panel/hero-panel-sm de color */
+.btn-back-hero {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+
+/* ---------- Pantallas de ingreso / registro ---------- */
+.btn-back {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+/* Solo las pantallas de login (cortas) se centran verticalmente;
+   los registros son más largos y se quedan alineados arriba. */
+.auth-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-body {
+  margin-top: 56px;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+.auth-icon {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.auth-icon svg {
+  width: 32px;
+  height: 32px;
+}
+.auth-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.auth-footnote {
+  font-size: 11px;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 12px;
+}
+.auth-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--primario);
+  margin-top: 14px;
+  padding: 4px;
+}
+
+/* ---------- Contenido de botón con icono + texto ---------- */
+.btn-icon-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+.btn-icon-row svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ---------- Overlay de escaneo de documentos ---------- */
+.scan-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 20, 32, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.scan-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.scan-card {
+  width: 78%;
+  max-width: 260px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 26px 22px;
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+.scan-spinner {
+  width: 46px;
+  height: 46px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primario);
+  animation: scan-spin 1s linear infinite;
+}
+.scan-spinner svg {
+  width: 34px;
+  height: 34px;
+}
+@keyframes scan-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.scan-progress {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+.scan-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--primario);
+  border-radius: 999px;
+  transition: width 2.1s cubic-bezier(0.3, 0.6, 0.4, 1);
+}
+
+/* ---------- Modal de confirmación ----------
+   Usa position:absolute (no fixed) para quedar contenido dentro del
+   marco del teléfono, igual que .scan-overlay — con fixed taparía
+   también el fondo oscuro fuera del teléfono. */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.modal-overlay[hidden] {
+  display: none;
+}
+.modal-box {
+  background: white;
+  border-radius: 20px;
+  padding: 22px;
+  width: 85%;
+  max-width: 320px;
+  max-height: calc(100% - 40px);
+  overflow-y: auto;
+}
+
+/* ---------- Impresión: solo el reporte, sin el marco del teléfono ---------- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #screen-reporte,
+  #screen-reporte * {
+    visibility: visible;
+  }
+  #screen-reporte {
+    position: absolute;
+    inset: 0;
+    padding: 24px;
+    overflow: visible;
+    transform: none;
+  }
+  #btnBackFromReporte,
+  #btnDescargarReporte,
+  #screen-reporte > p:last-of-type {
+    display: none;
+  }
+  /* Sin esto, la mayoría de navegadores omite el fondo morado del
+     hero-panel-sm al imprimir y el título queda en texto blanco
+     invisible sobre la hoja. */
+  #screen-reporte .hero-panel-sm {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

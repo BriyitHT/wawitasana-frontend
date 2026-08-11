@@ -1,0 +1,112 @@
+<!-- ============ PANTALLA 7B · PERFIL DEL MÉDICO ============ -->
+<section class="screen" id="screen-medico-perfil">
+  <div class="hero-panel-sm">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div style="position: relative; z-index: 2; text-align: center">
+      <div
+        style="
+          width: 68px;
+          height: 68px;
+          margin: 0 auto 10px;
+          border-radius: 50%;
+          background: #ffffff;
+          box-shadow: var(--shadow-sm);
+          overflow: hidden;
+        "
+      >
+        <img src="images/medico.jpeg" alt="Médico" class="avatar-img" />
+      </div>
+      <p
+        class="font-display"
+        style="font-size: 18px; font-weight: 700; margin: 0; color: #ffffff"
+        id="txtPerfilMedicoNombre"
+      >
+        Dra. Mariana Rojas
+      </p>
+      <p
+        style="
+          font-size: 12.5px;
+          color: rgba(255, 255, 255, 0.82);
+          margin: 2px 0 0;
+        "
+        id="txtPerfilMedicoEspecialidad"
+      >
+        Hematología pediátrica
+      </p>
+    </div>
+  </div>
+
+  <p
+    style="
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 18px 0 8px 2px;
+    "
+  >
+    Mis datos
+  </p>
+  <div class="card" style="margin-bottom: 16px">
+    <div class="kv-row">
+      <span class="kv-label">N.° de colegiatura (CMP)</span>
+      <span class="kv-value" id="txtPerfilMedicoCmp">45678</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Hospital</span>
+      <span class="kv-value" id="txtPerfilMedicoHospital">INSN San Borja</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Celular</span>
+      <span class="kv-value" id="txtPerfilMedicoTelefono">991 234 567</span>
+    </div>
+    <div class="kv-row">
+      <span class="kv-label">Correo</span>
+      <span class="kv-value" id="txtPerfilMedicoEmail"
+        >mrojas@insnsb.gob.pe</span
+      >
+    </div>
+  </div>
+
+  <div
+    class="card card--tint-primario"
+    style="
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: var(--primario-tint);
+      margin-bottom: 16px;
+    "
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--primario-dark)"
+      stroke-width="2"
+      style="flex-shrink: 0; margin-top: 2px"
+    >
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+    <p style="font-size: 12px; margin: 0; color: var(--ink)">
+      Solo ves pacientes cuyas familias activaron tu acceso. Ellas
+      pueden quitarlo cuando quieran.
+    </p>
+  </div>
+
+  <button
+    class="btn-ghost"
+    id="btnCerrarSesionMedico"
+    style="
+      color: var(--riesgo-alto);
+      border-color: var(--riesgo-alto);
+    "
+  >
+    Cerrar sesión
+  </button>
+</section>

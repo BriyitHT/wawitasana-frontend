@@ -1,0 +1,166 @@
+<!-- ============ PANTALLA 7 · PACIENTE (VISTA MÉDICO, SOLO LECTURA) ============ -->
+<section class="screen" id="screen-medico-paciente">
+  <button
+    class="btn-ghost btn-back btn-back-hero"
+    id="btnBackToMedicoHome"
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+    >
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
+  </button>
+
+  <div class="hero-panel-sm">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div
+      style="
+        position: relative;
+        z-index: 2;
+        padding-left: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      "
+    >
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div
+          style="
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+          "
+        >
+          <img src="images/nino.jpeg" alt="Paciente" class="avatar-img" />
+        </div>
+        <div>
+          <p
+            class="font-display"
+            style="font-size: 19px; font-weight: 700; margin: 0; color: #ffffff"
+            id="txtMedicoPacienteNombre"
+          >
+            Mateo
+          </p>
+          <p
+            style="font-size: 12px; color: rgba(255, 255, 255, 0.82); margin: 0"
+            id="txtMedicoPacienteEdad"
+          >
+            6 años
+          </p>
+        </div>
+      </div>
+      <span class="pill pill-medio" id="pillRiesgoMedico"
+        >Riesgo medio</span
+      >
+    </div>
+  </div>
+
+  <div class="card card--tint-primario" style="background: var(--primario-tint); margin-bottom: 14px">
+    <p
+      style="
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--primario-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0;
+      "
+    >
+      Ruta del tratamiento
+    </p>
+    <div class="ruta-track" id="rutaTrackMedico"></div>
+  </div>
+
+  <div
+    class="card"
+    style="
+      margin-bottom: 14px;
+      border-color: var(--salud);
+      background: var(--salud-tint);
+    "
+  >
+    <p
+      style="
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--salud-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin: 0 0 4px;
+      "
+    >
+      Próxima cita
+    </p>
+    <p style="font-weight: 700; margin: 0 0 2px">
+      Control hematológico
+    </p>
+    <p style="font-size: 13px; color: var(--ink-soft); margin: 0">
+      Viernes 14 de agosto · 9:00 a. m.
+    </p>
+  </div>
+
+  <button
+    class="btn-primary"
+    id="btnMarcarAsistencia"
+    style="margin-bottom: 14px"
+  >
+    <span class="btn-icon-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 11.1V12a10 10 0 1 1-5.9-9.1" />
+        <path d="M22 4L12 14.01l-3-3" />
+      </svg>
+      Marcar asistencia a este control
+    </span>
+  </button>
+
+  <p
+    style="
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 4px 0 8px 2px;
+    "
+  >
+    Documentos compartidos por la familia
+  </p>
+  <div id="listaDocumentosMedico" style="margin-bottom: 14px"></div>
+
+  <div
+    class="card"
+    style="
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: var(--paper-2);
+    "
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--ink-soft)"
+      stroke-width="2"
+      style="flex-shrink: 0; margin-top: 2px"
+    >
+      <rect x="3" y="11" width="18" height="10" rx="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+    <p style="font-size: 12px; margin: 0; color: var(--ink-soft)">
+      Vista de solo lectura. Esta información no reemplaza el criterio
+      clínico ni la historia física del paciente.
+    </p>
+  </div>
+</section>

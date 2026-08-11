@@ -1,0 +1,84 @@
+<!-- ============ PANTALLA 6 · INICIO MÉDICO (LISTA DE PACIENTES) ============ -->
+<section class="screen" id="screen-medico-home">
+  <div class="hero-panel-sm">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div
+      style="
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      "
+    >
+      <div>
+        <p style="font-size: 13px; color: rgba(255, 255, 255, 0.82); margin: 0">
+          Hola,
+        </p>
+        <p
+          class="font-display"
+          style="font-size: 19px; font-weight: 700; margin: 0; color: #ffffff"
+          id="txtMedicoNombre"
+        >
+          Dra. Rojas
+        </p>
+      </div>
+      <div
+        style="
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: #ffffff;
+          box-shadow: var(--shadow-sm);
+          overflow: hidden;
+        "
+      >
+        <img src="images/medico.jpeg" alt="Médico" class="avatar-img" />
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="card card--tint-primario"
+    style="
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: var(--primario-tint);
+      margin-bottom: 16px;
+    "
+  >
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--primario-dark)"
+      stroke-width="2"
+      style="flex-shrink: 0; margin-top: 2px"
+    >
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+    <p style="font-size: 12.5px; margin: 0; color: var(--ink)">
+      Solo ves la información de los pacientes cuyas familias
+      activaron tu acceso. Ellas pueden quitarlo cuando quieran.
+    </p>
+  </div>
+
+  <p
+    style="
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 8px 2px;
+    "
+  >
+    Pacientes con acceso activo
+  </p>
+  <div id="listaPacientesMedico"></div>
+</section>

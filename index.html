@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WawitaSana — Prototipo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="backdrop">
+      <div class="phone">
+        <div class="notch"></div>
+
+        <div class="push-banner" id="pushBanner">
+          <span
+            id="pushBannerIcono"
+            class="icon-sm"
+            style="
+              width: 22px;
+              height: 22px;
+              flex-shrink: 0;
+              color: var(--salud);
+            "
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+          </span>
+          <div style="min-width: 0">
+            <p style="font-weight: 700; font-size: 13px; margin: 0">
+              WawitaSana
+            </p>
+            <p
+              id="pushBannerTitulo"
+              style="font-weight: 700; font-size: 13px; margin: 1px 0 0"
+            >
+              Título
+            </p>
+            <p
+              id="pushBannerDetalle"
+              style="font-size: 12px; color: var(--ink-soft); margin: 1px 0 0"
+            >
+              Detalle
+            </p>
+          </div>
+        </div>
+
+        <div class="statusbar">
+          <span>9:41</span>
+          <span
+            class="font-display"
+            style="font-size: 14px; letter-spacing: 0.5px"
+            >WawitaSana</span
+          >
+          <span class="statusbar-icons">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+              <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+              <line x1="12" y1="20" x2="12.01" y2="20" />
+            </svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="7" width="19" height="10" rx="2" />
+              <line x1="22" y1="10.5" x2="22" y2="13.5" />
+              <rect x="3" y="9" width="13" height="6" rx="1" fill="currentColor" stroke="none" />
+            </svg>
+          </span>
+        </div>
+
+        <div class="screen-container" id="screenContainer">
+          <!-- Las 19 pantallas se cargan dinámicamente desde sections/ (ver js/loader.js) -->
+        </div>
+
+        <div id="toast"></div>
+
+        <div class="scan-overlay" id="scanOverlay">
+          <div class="scan-card">
+            <div class="scan-spinner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round" />
+              </svg>
+            </div>
+            <p
+              class="font-display"
+              style="font-weight: 700; font-size: 15px; margin: 14px 0 4px"
+            >
+              Analizando documento…
+            </p>
+            <p
+              style="
+                font-size: 12px;
+                color: var(--ink-soft);
+                margin: 0 0 16px;
+                word-break: break-word;
+              "
+              id="scanArchivoNombre"
+            >
+              documento.pdf
+            </p>
+            <div class="scan-progress">
+              <div class="scan-progress-bar" id="scanProgressBar"></div>
+            </div>
+            <p style="font-size: 11px; color: var(--ink-soft); margin: 12px 0 0">
+              Buscando fechas de control y datos clave con IA
+            </p>
+          </div>
+        </div>
+
+        <div class="modal-overlay" id="modalRetirarAcceso" hidden>
+          <div class="modal-box">
+            <h3
+              class="font-display"
+              style="font-size: 17px; font-weight: 700; margin: 0 0 10px; color: var(--ink)"
+            >
+              ¿Retirar acceso?
+            </h3>
+            <p style="font-size: 13.5px; line-height: 1.4; margin: 0 0 14px; color: var(--ink)">
+              Estás por retirar el acceso de
+              <strong id="modalRetirarAccesoNombre">—</strong>
+              (<span id="modalRetirarAccesoEspecialidad">—</span>) a la
+              información del paciente.
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 8px;
+                align-items: flex-start;
+                background: #f8e7e1;
+                border: 1px solid var(--riesgo-alto);
+                border-radius: var(--radius-sm);
+                padding: 10px 12px;
+                margin-bottom: 20px;
+              "
+            >
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--riesgo-alto)"
+                stroke-width="2"
+                style="flex-shrink: 0; margin-top: 2px"
+              >
+                <path d="M12 9v4M12 17h.01" />
+                <path
+                  d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"
+                />
+              </svg>
+              <p style="font-size: 12px; margin: 0; color: var(--ink)">
+                Si retiras este acceso, el doctor ya no podrá hacer
+                seguimiento del tratamiento. Esto puede afectar el control
+                y la continuidad del cuidado.
+              </p>
+            </div>
+            <button
+              id="modalRetirarAccesoCancelar"
+              class="btn-ghost"
+              style="margin-bottom: 10px"
+            >
+              Cancelar
+            </button>
+            <button
+              id="modalRetirarAccesoConfirmar"
+              class="btn-primary"
+              style="background: var(--riesgo-alto); box-shadow: none"
+            >
+              Sí, retirar acceso
+            </button>
+          </div>
+        </div>
+
+        <nav class="bottom-nav" id="bottomNav" hidden>
+          <button class="nav-item active" data-nav="inicio">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M3 11l9-8 9 8" />
+              <path d="M5 10v10h14V10" />
+            </svg>
+            Inicio
+          </button>
+          <button class="nav-item" data-nav="ruta">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M9 20l-5-2V6l5 2m0 12l6-2m-6 2V8m6 10l5 2V8l-5-2m0 12V6m0 0L9 8"
+              />
+            </svg>
+            Ruta
+          </button>
+          <button class="nav-item" data-nav="alertas">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+            </svg>
+            Alertas
+          </button>
+          <button class="nav-item" data-nav="perfil">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 21a8 8 0 1 0-16 0" />
+              <circle cx="12" cy="8" r="4" />
+            </svg>
+            Perfil
+          </button>
+        </nav>
+
+        <nav class="bottom-nav" id="bottomNavMedico" hidden>
+          <button class="nav-item active" data-nav="medico-inicio">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M3 11l9-8 9 8" />
+              <path d="M5 10v10h14V10" />
+            </svg>
+            Inicio
+          </button>
+          <button class="nav-item" data-nav="medico-perfil">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M20 21a8 8 0 1 0-16 0" />
+              <circle cx="12" cy="8" r="4" />
+            </svg>
+            Perfil
+          </button>
+        </nav>
+      </div>
+    </div>
+
+    <script src="js/loader.js"></script>
+  </body>
+</html>

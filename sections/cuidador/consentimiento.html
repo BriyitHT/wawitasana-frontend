@@ -1,0 +1,93 @@
+<!-- ============ PANTALLA 4 · CONSENTIMIENTO / COMPARTIR CON MÉDICO ============ -->
+<section class="screen" id="screen-consentimiento">
+  <button
+    class="btn-ghost btn-back btn-back-hero"
+    id="btnBackToDashboard"
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+    >
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
+  </button>
+
+  <div class="hero-panel-sm">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div style="position: relative; z-index: 2; padding-left: 44px">
+      <h2
+        class="font-display"
+        style="font-size: 20px; font-weight: 700; margin: 0 0 2px; color: #ffffff"
+      >
+        Compartir información
+      </h2>
+      <p
+        style="font-size: 13px; color: rgba(255, 255, 255, 0.82); margin: 0"
+      >
+        Tú decides qué médico puede ver los datos de
+        <span id="txtPacienteNombreConsent">Mateo</span>.
+      </p>
+    </div>
+  </div>
+
+  <div
+    class="card"
+    style="
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: var(--salud-tint);
+      border-color: var(--salud);
+      margin-bottom: 18px;
+    "
+  >
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--salud-dark)"
+      stroke-width="2"
+      style="flex-shrink: 0; margin-top: 2px"
+    >
+      <rect x="3" y="11" width="18" height="10" rx="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </svg>
+    <p style="font-size: 12.5px; margin: 0; color: var(--ink)">
+      Puedes activar o quitar el acceso a un médico cuando quieras,
+      incluso si cambias de centro de salud.
+    </p>
+  </div>
+
+  <p
+    style="
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 8px 2px;
+    "
+  >
+    Médicos registrados
+  </p>
+  <div id="listaMedicos"></div>
+
+  <p
+    style="
+      font-size: 11px;
+      color: var(--ink-soft);
+      text-align: center;
+      margin-top: 14px;
+    "
+  >
+    Prototipo de demostración: los cambios no se guardan al recargar
+    la página.
+  </p>
+</section>

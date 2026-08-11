@@ -1,0 +1,145 @@
+<!-- ============ PANTALLA 3B · DETALLE DE LA PRÓXIMA CITA ============ -->
+<section class="screen" id="screen-cita-detalle">
+  <button
+    class="btn-ghost btn-back btn-back-hero"
+    id="btnBackFromCitaDetalle"
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+    >
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
+  </button>
+
+  <div class="hero-panel-sm">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div style="position: relative; z-index: 2; padding-left: 44px">
+      <h2
+        class="font-display"
+        style="font-size: 20px; font-weight: 700; margin: 0 0 2px; color: #ffffff"
+      >
+        Detalle de tu cita
+      </h2>
+      <p
+        style="font-size: 13px; color: rgba(255, 255, 255, 0.82); margin: 0"
+      >
+        Toda la información que necesitas para tu próximo control.
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <div
+      class="card"
+      style="
+        margin-bottom: 14px;
+        border-color: var(--salud);
+        background: var(--salud-tint);
+      "
+    >
+      <p
+        style="
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--salud-dark);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin: 0 0 4px;
+        "
+      >
+        Próxima cita
+      </p>
+      <p
+        style="font-weight: 700; font-size: 16px; margin: 0 0 2px"
+        id="txtCitaDetalleTipo"
+      >
+        Control hematológico
+      </p>
+      <p
+        style="font-size: 13px; color: var(--ink-soft); margin: 0"
+        id="txtCitaDetalleFechaHora"
+      >
+        Viernes 14 de agosto · 9:00 a. m.
+      </p>
+    </div>
+
+    <div class="card" style="margin-bottom: 14px">
+      <p
+        style="
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--ink-soft);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin: 0 0 4px;
+        "
+      >
+        Lugar
+      </p>
+      <p style="font-weight: 700; margin: 0 0 2px" id="txtCitaDetalleLugar">
+        Instituto Nacional de Salud del Niño – San Borja
+      </p>
+      <p
+        style="font-size: 12.5px; color: var(--ink-soft); margin: 0 0 12px"
+        id="txtCitaDetalleDireccion"
+      >
+        Av. Javier Prado Este 3101, San Borja
+      </p>
+      <a
+        id="linkCitaDetalleMapa"
+        href="#"
+        target="_blank"
+        rel="noopener"
+        class="btn-ghost"
+        style="
+          display: block;
+          text-align: center;
+          text-decoration: none;
+          box-sizing: border-box;
+        "
+        >Cómo llegar</a
+      >
+    </div>
+
+    <div class="card" style="margin-bottom: 14px">
+      <p
+        style="
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--ink-soft);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin: 0 0 4px;
+        "
+      >
+        Médico a cargo
+      </p>
+      <p style="font-weight: 700; margin: 0" id="txtCitaDetalleMedico">
+        Dra. Mariana Rojas
+      </p>
+    </div>
+
+    <div class="card" style="margin-bottom: 14px">
+      <p
+        style="
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--ink-soft);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin: 0 0 10px;
+        "
+      >
+        Antes de venir
+      </p>
+      <div id="listaCitaDetallePreparacion"></div>
+    </div>
+  </div>
+</section>

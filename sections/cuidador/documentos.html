@@ -1,0 +1,71 @@
+<!-- ============ PANTALLA 14 · SUBIR DOCUMENTOS ============ -->
+<section class="screen" id="screen-documentos">
+  <button
+    class="btn-ghost btn-back btn-back-hero"
+    id="btnBackFromDocumentos"
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+    >
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
+  </button>
+
+  <div class="hero-panel-sm">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div style="position: relative; z-index: 2; padding-left: 44px">
+      <h2
+        class="font-display"
+        style="font-size: 20px; font-weight: 700; margin: 0 0 2px; color: #ffffff"
+      >
+        Documentos
+      </h2>
+      <p
+        style="font-size: 13px; color: rgba(255, 255, 255, 0.82); margin: 0"
+      >
+        Recetas, informes o resultados de
+        <span id="txtDocPacienteNombre">Mateo</span>. Los médicos con
+        acceso podrán verlos.
+      </p>
+    </div>
+  </div>
+
+  <input
+    type="file"
+    id="inputArchivo"
+    accept=".pdf,.jpg,.jpeg,.png"
+    style="display: none"
+  />
+  <label
+    for="inputArchivo"
+    class="btn-primary"
+    style="
+      display: block;
+      text-align: center;
+      box-sizing: border-box;
+      margin-bottom: 18px;
+    "
+    >+ Subir archivo (PDF o foto)</label
+  >
+
+  <p
+    style="
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 8px 2px;
+    "
+  >
+    Documentos subidos
+  </p>
+  <div id="listaDocumentosCuidador"></div>
+</section>

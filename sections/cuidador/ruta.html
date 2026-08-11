@@ -1,0 +1,78 @@
+<!-- ============ PANTALLA 11 · RUTA DETALLADA (tab "Ruta") ============ -->
+<section class="screen" id="screen-ruta">
+  <div class="hero-panel-sm">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div style="position: relative; z-index: 2">
+      <p
+        class="font-display"
+        style="font-size: 19px; font-weight: 700; margin: 0 0 2px; color: #ffffff"
+      >
+        Mi ruta hematológica
+      </p>
+      <p
+        style="font-size: 13px; color: rgba(255, 255, 255, 0.82); margin: 0"
+      >
+        El avance de <span id="txtRutaPacienteNombre">Mateo</span> en su
+        tratamiento.
+      </p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 14px">
+    <div class="ruta-track" id="rutaTrackDetalle"></div>
+  </div>
+
+  <div class="card" style="margin-bottom: 14px">
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 4px;
+      "
+    >
+      <p
+        style="
+          font-size: 11px;
+          font-weight: 700;
+          color: var(--ink-soft);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin: 0;
+        "
+      >
+        Nivel de riesgo de abandono
+      </p>
+      <span class="pill pill-medio" id="pillRiesgoRuta"
+        >Riesgo medio</span
+      >
+    </div>
+    <p
+      style="
+        font-size: 12px;
+        color: var(--ink-soft);
+        margin: 6px 0 12px;
+      "
+    >
+      Calculado a partir de factores con respaldo en estudios sobre
+      abandono de tratamiento oncológico pediátrico.
+    </p>
+    <div id="listaFactoresRiesgo"></div>
+  </div>
+
+  <p
+    style="
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 4px 0 8px 2px;
+    "
+  >
+    Historial de controles
+  </p>
+  <div id="listaHistorial" style="margin-bottom: 6px"></div>
+</section>

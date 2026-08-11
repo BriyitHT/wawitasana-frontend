@@ -1,0 +1,81 @@
+<!-- ============ PANTALLA 2 · LOGIN CUIDADOR ============ -->
+<section class="screen" id="screen-login">
+  <button
+    class="btn-ghost btn-back"
+    id="btnBackToSplash"
+    style="
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+    "
+  >
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+    >
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
+  </button>
+
+  <div class="hero-panel">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div style="position: relative; z-index: 2">
+      <div
+        class="auth-icon"
+        style="background: var(--surface); color: var(--salud)"
+      >
+        <img src="images/cuidador.jpeg" alt="Cuidador" />
+      </div>
+      <h2 class="font-display" style="font-size: 21px; font-weight: 700; margin: 0 0 4px; color: #ffffff">
+        Ingreso de cuidador
+      </h2>
+      <p style="font-size: 13px; color: rgba(255, 255, 255, 0.82); margin: 0">
+        Usa tu DNI y el código que te enviamos por SMS al
+        registrarte.
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <label
+      style="font-size: 12px; font-weight: 700; color: var(--ink-soft)"
+      >DNI</label
+    >
+    <input
+      class="input"
+      style="margin: 6px 0 14px"
+      type="text"
+      placeholder="Ej. 45678912"
+      id="inputDni"
+    />
+
+    <label
+      style="font-size: 12px; font-weight: 700; color: var(--ink-soft)"
+      >Código de verificación</label
+    >
+    <input
+      class="input"
+      style="margin: 6px 0 20px"
+      type="text"
+      placeholder="Código de 6 dígitos"
+      id="inputCodigo"
+    />
+
+    <button class="btn-primary" id="btnLogin">Ingresar</button>
+
+    <button id="btnIrRegistro" class="auth-link">
+      ¿No tienes cuenta? Regístrate
+    </button>
+
+    <p class="auth-footnote">
+      Prototipo de demostración: cualquier dato te lleva al panel de
+      ejemplo.
+    </p>
+  </div>
+</section>

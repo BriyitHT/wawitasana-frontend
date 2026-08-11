@@ -1,0 +1,126 @@
+<!-- ============ PANTALLA 1 · SELECTOR DE ROL ============ -->
+<section class="screen active" id="screen-splash">
+  <div class="hero-panel">
+    <div class="hero-shape hero-shape--1"></div>
+    <div class="hero-shape hero-shape--2"></div>
+    <div class="hero-shape hero-shape--3"></div>
+    <div style="position: relative; z-index: 2">
+      <div
+        style="
+          width: 68px;
+          height: 68px;
+          margin: 0 auto 10px;
+          border-radius: 50%;
+          background: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+        "
+      >
+        <img
+          src="images/logo.jpeg"
+          alt="Logo de WawitaSana"
+          class="avatar-img"
+        />
+      </div>
+      <h1
+        class="font-display"
+        style="font-size: 24px; font-weight: 700; margin: 0; color: #ffffff"
+      >
+        WawitaSana
+      </h1>
+      <p
+        style="
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.82);
+          margin: 4px 0 0;
+        "
+      >
+        Acompañamos cada paso de la ruta hematológica
+      </p>
+    </div>
+  </div>
+
+  <p
+    style="
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      margin: 0 0 4px 4px;
+    "
+  >
+    ¿Quién eres?
+  </p>
+
+  <div class="role-path" style="margin-top: 10px">
+    <button class="role-card" data-role="cuidador">
+      <div class="role-icon">
+        <img src="images/cuidador.jpeg" alt="Cuidador" />
+      </div>
+      <div>
+        <div class="role-title">Soy apoderado / cuidador</div>
+        <div class="role-desc">
+          Acompaño a mi niño en su tratamiento
+        </div>
+      </div>
+    </button>
+
+    <button class="role-card" data-role="nino">
+      <div class="role-icon">
+        <img src="images/nino.jpeg" alt="Niño" />
+      </div>
+      <div>
+        <div class="role-title">Soy el paciente (niño)</div>
+        <div class="role-desc">Mi avatar y mis retos</div>
+      </div>
+    </button>
+
+    <button class="role-card" data-role="medico">
+      <div class="role-icon">
+        <img src="images/medico.jpeg" alt="Médico" />
+      </div>
+      <div>
+        <div class="role-title">Soy médico</div>
+        <div class="role-desc">
+          Reviso pacientes que me dieron acceso
+        </div>
+      </div>
+    </button>
+
+    <button class="role-card disabled" data-role="donador">
+      <div class="role-icon">
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M12 21s-7-4.4-9-8.7C1.5 8.8 3.3 5.4 7 5c1.9-.2 3.5.7 5 2.7C13.5 5.7 15.1 4.8 17 5c3.7.4 5.5 3.8 4 7.3-2 4.3-9 8.7-9 8.7z"
+          />
+        </svg>
+      </div>
+      <div>
+        <div class="role-title">Quiero donar / apoyar</div>
+        <div class="role-desc">Red de donación de sangre</div>
+      </div>
+    </button>
+  </div>
+
+  <p
+    style="
+      font-size: 11px;
+      color: var(--ink-soft);
+      text-align: center;
+      margin-top: 6px;
+    "
+  >
+    Roles en gris: se habilitan en la siguiente versión del prototipo.
+  </p>
+</section>
