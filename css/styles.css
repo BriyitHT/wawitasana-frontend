@@ -67,7 +67,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 16px;
+  padding: min(40px, 4dvh) 16px;
   background:
     radial-gradient(
       circle at 20% 20%,
@@ -85,9 +85,9 @@ body {
 /* ---------- Marco del smartphone ---------- */
 .phone {
   position: relative;
-  width: min(430px, 94vw);
+  width: min(430px, 94vw, calc(92dvh * 430 / 932));
+  height: auto;
   aspect-ratio: 430 / 932;
-  height: min(932px, 92dvh);
   max-width: 94vw;
   background: var(--paper);
   border-radius: 46px;
