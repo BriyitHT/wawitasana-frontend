@@ -29,6 +29,14 @@ const DEMO = {
     { label: "Control" },
     { label: "Alta" },
   ],
+  // El consentimiento de la familia tiene dos campos independientes:
+  // - documentosVisibles: lo controla la familia con el switch en la
+  //   pantalla de consentimiento (recetas, resultados, informes).
+  // - seguimientoVisible: NO tiene control en la UI, siempre es true.
+  //   El nivel de riesgo y las alertas de seguimiento del paciente son
+  //   información de seguridad y se mantienen visibles para todo el
+  //   equipo de salud registrado — retirar el acceso a documentos
+  //   nunca apaga esto.
   medicos: [
     {
       id: 1,
@@ -38,7 +46,8 @@ const DEMO = {
       hospital: "INSN San Borja",
       email: "mrojas@insnsb.gob.pe",
       telefono: "991 234 567",
-      activo: true,
+      documentosVisibles: true,
+      seguimientoVisible: true,
     },
     {
       id: 2,
@@ -48,7 +57,8 @@ const DEMO = {
       hospital: "Hospital Regional del Cusco",
       email: "cninanya@hrcusco.gob.pe",
       telefono: "984 112 233",
-      activo: false,
+      documentosVisibles: false,
+      seguimientoVisible: true,
     },
     {
       id: 3,
@@ -58,7 +68,8 @@ const DEMO = {
       hospital: "Hospital de Apoyo de Iquitos",
       email: "lfernandez@hai.gob.pe",
       telefono: "965 887 120",
-      activo: false,
+      documentosVisibles: false,
+      seguimientoVisible: true,
     },
   ],
   medicoSesion: { medicoId: 1 }, // La demo "inicia sesión" como el médico con id 1 (Dra. Mariana Rojas)

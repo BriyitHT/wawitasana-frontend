@@ -36,6 +36,18 @@
     </div>
   </div>
 
+  <p
+    style="
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 8px 2px;
+    "
+  >
+    Documentos compartidos
+  </p>
   <div
     class="card"
     style="
@@ -44,7 +56,7 @@
       align-items: flex-start;
       background: var(--salud-tint);
       border-color: var(--salud);
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     "
   >
     <svg
@@ -60,10 +72,11 @@
       <path d="M7 11V7a5 5 0 0 1 10 0v4" />
     </svg>
     <p style="font-size: 12.5px; margin: 0; color: var(--ink)">
-      Puedes activar o quitar el acceso a un médico cuando quieras,
-      incluso si cambias de centro de salud.
+      Puedes activar o quitar el acceso a las recetas, resultados e
+      informes cuando quieras, incluso si cambias de centro de salud.
     </p>
   </div>
+  <div id="listaMedicos" style="margin-bottom: 24px"></div>
 
   <p
     style="
@@ -75,9 +88,35 @@
       margin: 0 0 8px 2px;
     "
   >
-    Médicos registrados
+    Seguimiento de riesgo
   </p>
-  <div id="listaMedicos"></div>
+  <div
+    class="card card--tint-primario"
+    style="
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      background: var(--primario-tint);
+      margin-bottom: 18px;
+    "
+  >
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="var(--primario-dark)"
+      stroke-width="2"
+      style="flex-shrink: 0; margin-top: 2px"
+    >
+      <path d="M12 22s8-4.5 8-11.8V5l-8-3-8 3v5.2C4 17.5 12 22 12 22z" />
+    </svg>
+    <p style="font-size: 12.5px; margin: 0; color: var(--ink)">
+      Tu equipo de salud siempre puede ver tu nivel de riesgo y alertas
+      de seguimiento, para garantizar tu continuidad de cuidado. Esto no
+      se puede desactivar.
+    </p>
+  </div>
 
   <p
     style="

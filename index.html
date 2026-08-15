@@ -119,21 +119,21 @@
               class="font-display"
               style="font-size: 17px; font-weight: 700; margin: 0 0 10px; color: var(--ink)"
             >
-              ¿Retirar acceso?
+              ¿Retirar acceso a los documentos?
             </h3>
             <p style="font-size: 13.5px; line-height: 1.4; margin: 0 0 14px; color: var(--ink)">
               Estás por retirar el acceso de
               <strong id="modalRetirarAccesoNombre">—</strong>
-              (<span id="modalRetirarAccesoEspecialidad">—</span>) a la
-              información del paciente.
+              (<span id="modalRetirarAccesoEspecialidad">—</span>) a las
+              recetas, resultados e informes que compartiste.
             </p>
             <div
               style="
                 display: flex;
                 gap: 8px;
                 align-items: flex-start;
-                background: #f8e7e1;
-                border: 1px solid var(--riesgo-alto);
+                background: var(--salud-tint);
+                border: 1px solid var(--salud);
                 border-radius: var(--radius-sm);
                 padding: 10px 12px;
                 margin-bottom: 20px;
@@ -144,19 +144,17 @@
                 height="17"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="var(--riesgo-alto)"
+                stroke="var(--salud-dark)"
                 stroke-width="2"
                 style="flex-shrink: 0; margin-top: 2px"
               >
-                <path d="M12 9v4M12 17h.01" />
-                <path
-                  d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"
-                />
+                <path d="M12 22s8-4.5 8-11.8V5l-8-3-8 3v5.2C4 17.5 12 22 12 22z" />
               </svg>
               <p style="font-size: 12px; margin: 0; color: var(--ink)">
-                Si retiras este acceso, el doctor ya no podrá hacer
-                seguimiento del tratamiento. Esto puede afectar el control
-                y la continuidad del cuidado.
+                El doctor seguirá viendo el nivel de riesgo y las alertas
+                de seguimiento: esa información se mantiene visible para
+                todo el equipo de salud por seguridad. Solo dejará de ver
+                los documentos.
               </p>
             </div>
             <button

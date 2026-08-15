@@ -112,7 +112,7 @@ function renderConsentimiento() {
         <p style="font-size:11.5px;color:var(--ink-soft);margin:1px 0 0;">${med.hospital}</p>
       </div>
       <label class="switch" style="flex-shrink:0;">
-        <input type="checkbox" data-med-id="${med.id}" ${med.activo ? "checked" : ""}>
+        <input type="checkbox" data-med-id="${med.id}" ${med.documentosVisibles ? "checked" : ""}>
         <span class="slider"></span>
       </label>
     </div>
@@ -127,15 +127,19 @@ function renderConsentimiento() {
       const medico = DEMO.medicos.find((m) => m.id === id);
 
       if (!e.target.checked) {
-        // Retirar acceso pide confirmación: se revierte el switch a
-        // "encendido" hasta que el usuario confirme en el modal.
+        // Retirar acceso a documentos pide confirmación: se revierte el
+        // switch a "encendido" hasta que el usuario confirme en el modal.
+        // El nivel de riesgo y las alertas de seguimiento (seguimientoVisible)
+        // nunca se tocan acá, sea cual sea la respuesta del usuario.
         e.target.checked = true;
         abrirModalRetirarAcceso(medico, e.target);
         return;
       }
 
-      medico.activo = true;
-      showToast(`Le diste acceso a ${medico.nombre.split(" ").slice(-1)}`);
+      medico.documentosVisibles = true;
+      showToast(
+        `Le diste acceso a documentos a ${medico.nombre.split(" ").slice(-1)}`,
+      );
     });
   });
 }
@@ -162,11 +166,15 @@ function cerrarModalRetirarAcceso() {
 
 function confirmarRetirarAcceso() {
   if (!medicoPendienteRetiro) return;
-  medicoPendienteRetiro.activo = false;
+  // Solo afecta documentosVisibles: seguimientoVisible es información de
+  // seguridad del paciente y se mantiene intacta pase lo que pase acá.
+  medicoPendienteRetiro.documentosVisibles = false;
   if (inputPendienteRetiro) inputPendienteRetiro.checked = false;
   const nombre = medicoPendienteRetiro.nombre;
   cerrarModalRetirarAcceso();
-  showToast(`Le quitaste el acceso a ${nombre.split(" ").slice(-1)}`);
+  showToast(
+    `Le quitaste el acceso a documentos a ${nombre.split(" ").slice(-1)}`,
+  );
 }
 
 /* ---------- Vista del médico: lista de pacientes con acceso activo ---------- */
@@ -176,7 +184,9 @@ function renderMedicoHome() {
 
   const lista = document.getElementById("listaPacientesMedico");
 
-  if (!medico.activo) {
+  // El médico aparece en la lista si tiene documentos visibles o (como
+  // mínimo, siempre) el seguimiento de riesgo — nunca queda sin nada.
+  if (!medico.documentosVisibles && !medico.seguimientoVisible) {
     lista.innerHTML = `
       <div class="card" style="text-align:center;padding:28px 18px;">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--ink-soft)" stroke-width="1.8" style="margin:0 auto 10px;"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-6.5 0-10-8-10-8a19.4 19.4 0 0 1 4.22-5.44M9.9 4.24A10.94 10.94 0 0 1 12 4c6.5 0 10 8 10 8a19.4 19.4 0 0 1-2.19 3.19M1 1l22 22"/></svg>
@@ -217,7 +227,22 @@ function renderMedicoPaciente() {
   pill.textContent = "Riesgo " + DEMO.paciente.riesgo;
 
   renderRutaInto("rutaTrackMedico");
-  pintarDocumentos("listaDocumentosMedico");
+
+  // El score de riesgo y la ruta de arriba se ven siempre (seguimientoVisible).
+  // Los documentos solo si la familia le dio acceso a ESTE médico.
+  const medicoSesion = DEMO.medicos.find(
+    (m) => m.id === DEMO.medicoSesion.medicoId,
+  );
+  if (medicoSesion.documentosVisibles) {
+    pintarDocumentos("listaDocumentosMedico");
+  } else {
+    document.getElementById("listaDocumentosMedico").innerHTML = `
+      <div class="card" style="text-align:center;padding:20px;">
+        <p style="font-size:12.5px;color:var(--ink-soft);margin:0;">
+          La familia todavía no compartió documentos contigo.
+        </p>
+      </div>`;
+  }
 
   const btnAsistencia = document.getElementById("btnMarcarAsistencia");
   btnAsistencia.disabled = false;
@@ -319,7 +344,7 @@ function renderAvatarVisual() {
 function renderReporte() {
   const medicosActivos =
     DEMO.medicos
-      .filter((m) => m.activo)
+      .filter((m) => m.documentosVisibles)
       .map((m) => m.nombre)
       .join(", ") || "Ninguno por ahora";
   document.getElementById("reporteContenido").innerHTML = `
@@ -511,7 +536,8 @@ function renderCitaDetalle() {
     `https://www.google.com/maps/search/?api=1&query=${cita.lat},${cita.lng}`;
 
   const medicoACargo =
-    DEMO.medicos.find((m) => m.activo)?.nombre || DEMO.medicos[0].nombre;
+    DEMO.medicos.find((m) => m.documentosVisibles)?.nombre ||
+    DEMO.medicos[0].nombre;
   document.getElementById("txtCitaDetalleMedico").textContent = medicoACargo;
 
   document.getElementById("listaCitaDetallePreparacion").innerHTML =
