@@ -629,7 +629,6 @@ function initApp() {
       setNav(null); // ningún rol muestra el menú de otro mientras inicia sesión
       if (role === "cuidador") showScreen("screen-login");
       if (role === "medico") showScreen("screen-login-medico");
-      if (role === "nino") showScreen("screen-login-nino");
     });
   });
 
