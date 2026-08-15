@@ -494,6 +494,12 @@ function pintarAlertas() {
       <div style="min-width:0;flex:1;">
         <p style="font-weight:700;font-size:13.5px;margin:0;">${copyRiesgo.titulo}</p>
         <p style="font-size:12px;color:var(--ink-soft);margin:2px 0 0;">${copyRiesgo.detalle}</p>
+        <button
+          id="btnVerComunidadAlerta"
+          style="margin-top:8px;font-size:12px;font-weight:700;color:var(--primario);background:none;border:none;padding:0;cursor:pointer;"
+        >
+          Ver comunidad de apoyo →
+        </button>
       </div>
     </div>`
     : "";
@@ -529,6 +535,18 @@ function pintarAlertas() {
       pintarAlertas();
     });
   });
+
+  // El botón "Ver comunidad de apoyo" vive dentro de la tarjeta de riesgo,
+  // que se re-arma en cada pintarAlertas(): por eso su listener se engancha
+  // acá (como los de arriba) y no en initApp(), donde todavía no existiría
+  // en el DOM.
+  const btnVerComunidad = document.getElementById("btnVerComunidadAlerta");
+  if (btnVerComunidad) {
+    btnVerComunidad.addEventListener("click", () => {
+      showScreen("screen-comunidad");
+      setNavActive("bottomNav", "comunidad");
+    });
+  }
 }
 
 /* ---------- Tab Perfil ---------- */
@@ -803,6 +821,7 @@ function initApp() {
         renderAlertas();
         showScreen("screen-alertas");
       }
+      if (destino === "comunidad") showScreen("screen-comunidad");
       if (destino === "perfil") {
         renderPerfil();
         showScreen("screen-perfil");
@@ -960,6 +979,13 @@ function initApp() {
     .getElementById("modalRetirarAcceso")
     .addEventListener("click", (e) => {
       if (e.target.id === "modalRetirarAcceso") cerrarModalRetirarAcceso();
+    });
+
+  // Comunidad de apoyo: contenido de ejemplo (mock), "Publicar" no guarda nada
+  document
+    .getElementById("btnPublicarComunidad")
+    .addEventListener("click", () => {
+      showToast("Función disponible próximamente en la versión completa");
     });
 
   // Salir del avatar del niño (vuelve a splash o al dashboard, según por dónde entró)

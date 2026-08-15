@@ -25,6 +25,7 @@ const SECTIONS = [
   "sections/cuidador/mapa.html",
   "sections/cuidador/ruta.html",
   "sections/cuidador/alertas.html",
+  "sections/cuidador/comunidad.html",
   "sections/cuidador/perfil.html",
   "sections/cuidador/documentos.html",
   "sections/auth/login-nino.html",
