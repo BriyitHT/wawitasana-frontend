@@ -20,6 +20,8 @@ const ICONS = {
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
   checkCircle:
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4L12 14.01l-3-3"/></svg>',
+  phoneCall:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
 };
 
 /* Arma el contenido de un botón con icono + texto (ver .btn-icon-row en css) */
@@ -436,6 +438,27 @@ const ESTILO_ALERTA = {
   motivacion: { fondo: "var(--wawa-tint)", tinte: "card--tint-wawa", icono: "var(--wawa-dark)" },
 };
 
+/* Aviso de seguimiento según el nivel de riesgo de abandono (deja claro
+   QUIÉN va a contactar a la familia, nunca al médico como destinatario).
+   Usa los colores reales de riesgo (no los de marca) porque acá sí
+   corresponde: es justo el caso que ese color está reservado para.
+   Riesgo bajo no genera aviso — no hace falta escalar ningún contacto. */
+const COPY_ALERTA_RIESGO = {
+  medio: {
+    titulo: "La enfermera coordinadora de tu ruta te contactará esta semana",
+    detalle: "Para acompañarte en el seguimiento de tu tratamiento.",
+    fondo: "#fbf1de",
+    icono: "var(--riesgo-medio)",
+  },
+  alto: {
+    titulo: "El equipo de apoyo psicosocial se pondrá en contacto contigo",
+    detalle:
+      "En las próximas 24 a 48 horas, para ayudarte con lo que necesites.",
+    fondo: "#f8e7e1",
+    icono: "var(--riesgo-alto)",
+  },
+};
+
 function renderAlertas() {
   document.getElementById("txtAlertasPacienteNombre").textContent =
     DEMO.paciente.nombre;
@@ -458,14 +481,33 @@ function renderAlertas() {
 
 function pintarAlertas() {
   const cont = document.getElementById("listaAlertas");
-  cont.innerHTML = DEMO.alertas
-    .map((a) => {
-      const estilo = ESTILO_ALERTA[a.tipo] || {
-        fondo: "var(--surface)",
-        tinte: "",
-        icono: "var(--salud)",
-      };
-      return `
+
+  // Tarjeta de seguimiento por riesgo: no viene de DEMO.alertas (no es
+  // una notificación que se marca como leída, es un estado vigente), así
+  // que se arma aparte y va primero. No es un <button> con data-alerta-id
+  // a propósito: no se puede descartar, solo cambia si cambia el riesgo.
+  const copyRiesgo = COPY_ALERTA_RIESGO[DEMO.paciente.riesgo];
+  const tarjetaRiesgo = copyRiesgo
+    ? `
+    <div class="card" style="display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;background:${copyRiesgo.fondo};">
+      <span class="icon-sm" style="width:20px;height:20px;flex-shrink:0;color:${copyRiesgo.icono};">${ICONS.phoneCall}</span>
+      <div style="min-width:0;flex:1;">
+        <p style="font-weight:700;font-size:13.5px;margin:0;">${copyRiesgo.titulo}</p>
+        <p style="font-size:12px;color:var(--ink-soft);margin:2px 0 0;">${copyRiesgo.detalle}</p>
+      </div>
+    </div>`
+    : "";
+
+  cont.innerHTML =
+    tarjetaRiesgo +
+    DEMO.alertas
+      .map((a) => {
+        const estilo = ESTILO_ALERTA[a.tipo] || {
+          fondo: "var(--surface)",
+          tinte: "",
+          icono: "var(--salud)",
+        };
+        return `
     <button class="card ${estilo.tinte}" data-alerta-id="${a.id}" style="display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;cursor:pointer;margin-bottom:10px;background:${estilo.fondo};${a.leida ? "opacity:0.6;" : ""}">
       <span class="icon-sm" style="width:20px;height:20px;flex-shrink:0;color:${estilo.icono};">${ICONOS_ALERTA[a.tipo] || ICONS.bell}</span>
       <div style="min-width:0;flex:1;">
@@ -476,8 +518,8 @@ function pintarAlertas() {
         <p style="font-size:12px;color:var(--ink-soft);margin:2px 0 0;">${a.detalle}</p>
       </div>
     </button>`;
-    })
-    .join("");
+      })
+      .join("");
 
   cont.querySelectorAll("[data-alerta-id]").forEach((btn) => {
     btn.addEventListener("click", () => {
