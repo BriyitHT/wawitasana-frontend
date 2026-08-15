@@ -43,6 +43,104 @@
     </div>
   </div>
 
+  <!-- Estadísticas reales (trabajo de campo del hospital) — pobladas por
+       renderSplash() en js/app.js desde DEMO.estadisticasGenerales. -->
+  <div
+    style="
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 0 0 18px;
+    "
+  >
+    <div
+      style="
+        background: var(--primario-tint);
+        border-radius: var(--radius-md);
+        padding: 12px 10px;
+        text-align: center;
+      "
+    >
+      <p
+        class="font-display"
+        style="font-size: 20px; font-weight: 700; margin: 0; color: var(--primario-dark)"
+        id="statCasosRegistrados"
+      >
+        102
+      </p>
+      <p
+        style="font-size: 10.5px; color: var(--ink-soft); margin: 2px 0 0; line-height: 1.25"
+      >
+        Casos registrados en 2025
+      </p>
+    </div>
+
+    <div
+      style="
+        background: var(--primario-tint);
+        border-radius: var(--radius-md);
+        padding: 12px 10px;
+        text-align: center;
+      "
+    >
+      <p
+        class="font-display"
+        style="font-size: 20px; font-weight: 700; margin: 0; color: var(--primario-dark)"
+      >
+        <span id="statTasaAbandono">12.7</span>%
+      </p>
+      <p
+        style="font-size: 10.5px; color: var(--ink-soft); margin: 2px 0 0; line-height: 1.25"
+      >
+        Tasa de abandono
+      </p>
+    </div>
+
+    <div
+      style="
+        background: var(--primario-tint);
+        border-radius: var(--radius-md);
+        padding: 12px 10px;
+        text-align: center;
+      "
+    >
+      <p
+        class="font-display"
+        style="font-size: 20px; font-weight: 700; margin: 0; color: var(--primario-dark)"
+        id="statPacientesActivos"
+      >
+        73
+      </p>
+      <p
+        style="font-size: 10.5px; color: var(--ink-soft); margin: 2px 0 0; line-height: 1.25"
+      >
+        Pacientes activos
+      </p>
+    </div>
+
+    <div
+      style="
+        background: var(--primario-tint);
+        border-radius: var(--radius-md);
+        padding: 12px 10px;
+        text-align: center;
+      "
+    >
+      <p
+        class="font-display"
+        style="font-size: 20px; font-weight: 700; margin: 0; color: var(--primario-dark)"
+        id="statDuplasMedicas"
+      >
+        10
+      </p>
+      <p
+        style="font-size: 10.5px; color: var(--ink-soft); margin: 2px 0 0; line-height: 1.25"
+      >
+        Duplas médicas (<span id="statTotalMedicos">20</span> médicos)
+      </p>
+    </div>
+  </div>
+
   <p
     style="
       font-size: 12px;
@@ -62,7 +160,7 @@
         <img src="images/cuidador.jpeg" alt="Cuidador" />
       </div>
       <div>
-        <div class="role-title">Soy apoderado / cuidador</div>
+        <div class="role-title">Cuidador</div>
         <div class="role-desc">Acompaño a mi niño en su tratamiento</div>
       </div>
     </button>
@@ -72,8 +170,8 @@
         <img src="images/medico.jpeg" alt="Médico" />
       </div>
       <div>
-        <div class="role-title">Soy médico</div>
-        <div class="role-desc">Reviso pacientes que me dieron acceso</div>
+        <div class="role-title">Personal asistencial</div>
+        <div class="role-desc">Acceso a pacientes asignados y en riesgo</div>
       </div>
     </button>
   </div>

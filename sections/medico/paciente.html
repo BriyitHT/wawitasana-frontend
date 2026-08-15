@@ -26,7 +26,7 @@
         z-index: 2;
         padding-left: 44px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
       "
     >
@@ -59,9 +59,27 @@
           </p>
         </div>
       </div>
-      <span class="pill pill-medio" id="pillRiesgoMedico"
-        >Riesgo medio</span
-      >
+      <div style="text-align: right; flex-shrink: 0">
+        <span class="pill pill-medio" id="pillRiesgoMedico">Riesgo medio</span>
+        <button
+          id="linkProfesionalesMedico"
+          style="
+            display: block;
+            margin-top: 4px;
+            font-size: 10.5px;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: underline;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            text-align: right;
+          "
+        >
+          3 profesionales asignados · Ver detalle
+        </button>
+      </div>
     </div>
   </div>
 

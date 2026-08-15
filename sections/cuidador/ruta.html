@@ -29,7 +29,7 @@
       style="
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
         margin-bottom: 4px;
       "
     >
@@ -41,13 +41,31 @@
           text-transform: uppercase;
           letter-spacing: 0.05em;
           margin: 0;
+          padding-top: 2px;
         "
       >
         Nivel de riesgo de abandono
       </p>
-      <span class="pill pill-medio" id="pillRiesgoRuta"
-        >Riesgo medio</span
-      >
+      <div style="text-align: right; flex-shrink: 0">
+        <span class="pill pill-medio" id="pillRiesgoRuta">Riesgo medio</span>
+        <button
+          id="linkProfesionalesRuta"
+          style="
+            display: block;
+            margin-top: 4px;
+            font-size: 10.5px;
+            font-weight: 700;
+            color: var(--primario);
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            text-align: right;
+          "
+        >
+          3 profesionales asignados · Ver detalle
+        </button>
+      </div>
     </div>
     <p
       style="

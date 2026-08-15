@@ -76,8 +76,13 @@ function showPushBanner(icono, titulo, detalle, alClic) {
   };
 }
 
-/* ---------- Pinta la ruta del paciente usando DEMO ---------- */
-function renderRutaInto(containerId) {
+/* ---------- Pinta la ruta del paciente usando DEMO ----------
+   profesionalesLinkId es opcional: si se pasa, también pinta y engancha
+   el link "N profesionales asignados · Ver detalle" que va junto al
+   badge de riesgo en las 3 pantallas que llaman a esta función (el badge
+   en sí no vive acá, lo pinta cada pantalla por separado). Se reusa la
+   misma función en vez de repetir esta lógica 3 veces. */
+function renderRutaInto(containerId, profesionalesLinkId) {
   const track = document.getElementById(containerId);
   const actual = DEMO.paciente.faseActual;
   track.innerHTML = DEMO.rutaPasos
@@ -93,9 +98,16 @@ function renderRutaInto(containerId) {
       </div>`;
     })
     .join("");
+
+  if (!profesionalesLinkId) return;
+  const link = document.getElementById(profesionalesLinkId);
+  if (!link) return;
+  const n = DEMO.paciente.profesionalesAsignados.length;
+  link.textContent = `${n} profesional${n === 1 ? "" : "es"} asignado${n === 1 ? "" : "s"} · Ver detalle`;
+  link.onclick = () => abrirModalProfesionales();
 }
 function renderRuta() {
-  renderRutaInto("rutaTrack");
+  renderRutaInto("rutaTrack", "linkProfesionalesDashboard");
 }
 
 /* ---------- Pinta la lista de médicos con su switch de acceso ---------- */
@@ -179,6 +191,32 @@ function confirmarRetirarAcceso() {
   );
 }
 
+/* ---------- Modal de profesionales asignados (mismo patrón que el
+   modal de retirar acceso: overlay + caja, se cierra tocando afuera o
+   con el botón). A diferencia de ese, este es solo informativo, sin
+   confirmar/cancelar. ---------- */
+function abrirModalProfesionales() {
+  document.getElementById("modalProfesionalesPaciente").textContent =
+    DEMO.paciente.nombre;
+  document.getElementById("listaModalProfesionales").innerHTML =
+    DEMO.paciente.profesionalesAsignados
+      .map(
+        (p) => `
+    <div class="card" style="margin-bottom:10px;">
+      <p style="font-weight:700;font-size:13.5px;margin:0;">${p.nombre}</p>
+      <p style="font-size:12px;color:var(--ink-soft);margin:2px 0 0;">${p.cargo} · ${p.cep}</p>
+      <p style="font-size:11.5px;color:var(--ink-soft);margin:1px 0 0;">${p.institucion}</p>
+      <p style="font-size:11.5px;font-weight:600;margin:6px 0 0;color:var(--primario-dark);">Total: ${p.totalPacientesAsignados} pacientes asignados</p>
+    </div>`,
+      )
+      .join("");
+  document.getElementById("modalProfesionales").hidden = false;
+}
+
+function cerrarModalProfesionales() {
+  document.getElementById("modalProfesionales").hidden = true;
+}
+
 /* ---------- Vista del médico: lista de pacientes con acceso activo ---------- */
 function renderMedicoHome() {
   const medico = DEMO.medicos.find((m) => m.id === DEMO.medicoSesion.medicoId);
@@ -228,7 +266,7 @@ function renderMedicoPaciente() {
   pill.className = "pill pill-" + DEMO.paciente.riesgo;
   pill.textContent = "Riesgo " + DEMO.paciente.riesgo;
 
-  renderRutaInto("rutaTrackMedico");
+  renderRutaInto("rutaTrackMedico", "linkProfesionalesMedico");
 
   // El score de riesgo y la ruta de arriba se ven siempre (seguimientoVisible).
   // Los documentos solo si la familia le dio acceso a ESTE médico.
@@ -388,7 +426,7 @@ function renderMapa() {
 function renderRutaTab() {
   document.getElementById("txtRutaPacienteNombre").textContent =
     DEMO.paciente.nombre;
-  renderRutaInto("rutaTrackDetalle");
+  renderRutaInto("rutaTrackDetalle", "linkProfesionalesRuta");
 
   const pill = document.getElementById("pillRiesgoRuta");
   pill.className = "pill pill-" + DEMO.paciente.riesgo;
@@ -612,10 +650,26 @@ function renderCitaDetalle() {
       .join("");
 }
 
+/* ---------- Splash: estadísticas reales del hospital ---------- */
+function renderSplash() {
+  const e = DEMO.estadisticasGenerales;
+  document.getElementById("statCasosRegistrados").textContent =
+    e.casosRegistrados2025;
+  document.getElementById("statTasaAbandono").textContent = e.tasaAbandono;
+  document.getElementById("statPacientesActivos").textContent =
+    e.pacientesActivos;
+  document.getElementById("statDuplasMedicas").textContent = e.duplasMedicas;
+  document.getElementById("statTotalMedicos").textContent = e.totalMedicos;
+}
+
 /* ---------- Eventos ----------
    initApp() la llama js/loader.js una vez que las pantallas de
    sections/ ya están insertadas en el DOM. */
 function initApp() {
+  // El splash es la pantalla inicial: se pinta una sola vez acá, no hace
+  // falta volver a llamarla (sus datos no cambian durante la demo).
+  renderSplash();
+
   // Selector de rol
   document.querySelectorAll(".role-card").forEach((card) => {
     card.addEventListener("click", () => {
@@ -978,6 +1032,16 @@ function initApp() {
     .getElementById("modalRetirarAcceso")
     .addEventListener("click", (e) => {
       if (e.target.id === "modalRetirarAcceso") cerrarModalRetirarAcceso();
+    });
+
+  // Modal de profesionales asignados (solo informativo)
+  document
+    .getElementById("modalProfesionalesCerrar")
+    .addEventListener("click", cerrarModalProfesionales);
+  document
+    .getElementById("modalProfesionales")
+    .addEventListener("click", (e) => {
+      if (e.target.id === "modalProfesionales") cerrarModalProfesionales();
     });
 
   // Comunidad de apoyo: contenido de ejemplo (mock), "Publicar" no guarda nada

@@ -6,6 +6,15 @@
    ============================================================ */
 
 const DEMO = {
+  // A diferencia del resto de DEMO (mock), estos números sí son reales:
+  // vienen del trabajo de campo del hospital. No inventar ni cambiar.
+  estadisticasGenerales: {
+    casosRegistrados2025: 102,
+    tasaAbandono: 12.7,
+    pacientesActivos: 73,
+    duplasMedicas: 10,
+    totalMedicos: 20,
+  },
   cuidador: {
     nombre: "Rosa Quispe",
     parentesco: "Mamá",
@@ -21,6 +30,29 @@ const DEMO = {
     faseActual: 2, // índice dentro de rutaPasos (0-based)
     riesgo: "medio", // "bajo" | "medio" | "alto"
     avatarNivel: 3,
+    profesionalesAsignados: [
+      {
+        nombre: "Dr. Carlos Ninanya",
+        cargo: "Médico principal",
+        cep: "CMP 45231",
+        institucion: "INSN San Borja",
+        totalPacientesAsignados: 9,
+      },
+      {
+        nombre: "Dra. Fiorella Rojas",
+        cargo: "Médico de soporte",
+        cep: "CMP 52108",
+        institucion: "INSN San Borja",
+        totalPacientesAsignados: 6,
+      },
+      {
+        nombre: "Lic. Ana Torres",
+        cargo: "Enfermera coordinadora",
+        cep: "CEP 98341",
+        institucion: "INSN San Borja",
+        totalPacientesAsignados: 12,
+      },
+    ],
   },
   rutaPasos: [
     { label: "Diagnóstico" },
