@@ -85,8 +85,8 @@ body {
 /* ---------- Marco del smartphone ---------- */
 .phone {
   position: relative;
-  width: min(430px, 94vw, calc(92dvh * 430 / 932));
-  height: auto;
+  width: min(430px, 94vw);
+  height: min(932px, 92dvh);
   aspect-ratio: 430 / 932;
   max-width: 94vw;
   background: var(--paper);
